@@ -1,0 +1,15 @@
+{
+  "name": "reels-lite",
+  "version": "1.0.0",
+  "description": "Reels Lite: private two-person app with a relay server that only ever sees encrypted data",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

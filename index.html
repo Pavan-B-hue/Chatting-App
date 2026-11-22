@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reels Lite</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#141414">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Reels Lite">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<main id="lock" class="screen dark">
+  <div class="logo"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#F2F2F2"></path></svg></div>
+  <div class="titles">
+    <h1>Reels Lite</h1>
+    <p>Enter passcode to continue</p>
+  </div>
+  <form id="lockForm" class="stack" autocomplete="off" novalidate>
+    <label for="pw" class="sr">Passcode</label>
+    <input id="pw" class="field mask" type="text" placeholder="Passcode" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go">
+    <button type="submit" class="btn-light">Continue</button>
+    <p id="lockErr" class="err" role="alert"></p>
+  </form>
+</main>
+
+<main id="setup" class="screen dark hidden">
+  <div class="titles">
+    <h1>Reels Lite</h1>
+    <p>First-time setup</p>
+  </div>
+  <form id="setupForm" class="stack" autocomplete="off" novalidate>
+    <label for="sName" class="lbl">Your name</label>
+    <input id="sName" class="field" type="text" placeholder="Your name" autocomplete="off" maxlength="20">
+    <label for="sTheir" class="lbl">Their name</label>
+    <input id="sTheir" class="field" type="text" placeholder="Their name" autocomplete="off" maxlength="20">
+    <label for="sReels" class="lbl">Reels passcode</label>
+    <input id="sReels" class="field mask" type="text" placeholder="Opens Instagram reels" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <label for="sChat" class="lbl">Chat passcode (the same on both phones)</label>
+    <input id="sChat" class="field mask" type="text" placeholder="Opens the chat" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <label for="sChat2" class="lbl sr">Repeat chat passcode</label>
+    <input id="sChat2" class="field mask" type="text" placeholder="Repeat chat passcode" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <button type="submit" class="btn-light">Save</button>
+    <p id="setupErr" class="err" role="alert"></p>
+  </form>
+</main>
+
+<section id="chat" class="screen light hidden" aria-label="Chat">
+  <header class="bar">
+    <div class="avatar" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.5-9A5.5 5.5 0 0 1 12 6.5 5.5 5.5 0 0 1 21.5 12c-2.5 4.6-9.5 9-9.5 9z" fill="#C2305A"></path></svg></div>
+    <div class="who">
+      <span id="theirName" class="name">Chat</span>
+      <span id="status" class="sub">connecting</span>
+    </div>
+    <button id="btnDraw" class="icon-btn" type="button" aria-label="Open drawing zone"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C2305A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button>
+    <button id="btnLock" class="icon-btn" type="button" aria-label="Lock now"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></button>
+  </header>
+  <div id="msgs" class="msgs" aria-live="polite"></div>
+  <div id="panel" class="panel hidden">
+    <div id="panelEmoji" class="hidden">
+      <div id="emojiTabs" class="tabs"></div>
+      <div id="emojiGrid" class="egrid"></div>
+    </div>
+    <div id="panelSticker" class="hidden">
+      <div id="stickerGrid" class="sgrid"></div>
+      <div class="gif-box">
+        <div class="gif-row">
+          <label for="gifQ" class="sr">Search online stickers</label>
+          <input id="gifQ" class="msg-input small" type="text" placeholder="Search online stickers" autocomplete="off">
+          <button id="gifGo" class="pill" type="button">Search</button>
+        </div>
+        <div id="gifSetup" class="gif-setup hidden">
+          <label for="gifKey" class="sr">GIPHY API key</label>
+          <input id="gifKey" class="msg-input small" type="text" placeholder="Paste a free GIPHY API key" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <button id="gifKeySave" class="pill" type="button">Save key</button>
+        </div>
+        <div id="gifGrid" class="ggrid"></div>
+      </div>
+    </div>
+  </div>
+  <div class="composer">
+    <div class="chips">
+      <button id="btnSticker" class="chip" type="button">Stickers</button>
+      <button id="btnEmoji" class="chip" type="button">Emojis</button>
+    </div>
+    <div class="row-in">
+      <button id="btnAttach" class="icon-btn" type="button" aria-label="Attach photo or video"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8l9-9a3.7 3.7 0 0 1 5.2 5.2l-9 9a1.8 1.8 0 0 1-2.6-2.6l8.2-8.2"></path></svg></button>
+      <label for="msg" class="sr">Message</label>
+      <input id="msg" class="msg-input" type="text" placeholder="Type a message" autocomplete="off" enterkeyhint="send">
+      <button id="btnSend" class="send" type="button" aria-label="Send"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"></path></svg></button>
+    </div>
+  </div>
+</section>
+
+<section id="draw" class="screen light hidden" aria-label="Drawing zone">
+  <header class="bar">
+    <button id="dBack" class="icon-btn" type="button" aria-label="Back to chat"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+    <div class="who">
+      <span class="name">Drawing zone</span>
+      <span class="sub">Draw together, live</span>
+    </div>
+  </header>
+  <div class="board"><canvas id="canvas" width="900" height="1200" aria-label="Shared drawing canvas"></canvas></div>
+  <div class="tools">
+    <div id="colors" class="colors"></div>
+    <div class="row-tools">
+      <button class="brush" type="button" data-size="6" aria-label="Thin brush"><span style="width:6px;height:6px"></span></button>
+      <button class="brush on" type="button" data-size="12" aria-label="Medium brush"><span style="width:12px;height:12px"></span></button>
+      <button class="brush" type="button" data-size="22" aria-label="Thick brush"><span style="width:20px;height:20px"></span></button>
+      <span class="grow"></span>
+      <button id="dUndo" class="icon-btn" type="button" aria-label="Undo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3"></path></svg></button>
+      <button id="dClear" class="icon-btn" type="button" aria-label="Clear canvas"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></button>
+      <button id="dSend" class="pill strong" type="button">Send to chat</button>
+    </div>
+  </div>
+</section>
+
+<input id="file" type="file" accept="image/*,video/*" hidden>
+<div id="toast" class="toast hidden" role="status"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
