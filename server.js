@@ -12,11 +12,13 @@ const { WebSocketServer } = require('ws');
 
 const PORT = process.env.PORT || 3000;
 
+// Application files are stored in the repository root.
 const PUBLIC_DIR = __dirname;
 
+// Store backlog data inside the repository directory.
 const DATA_FILE =
     process.env.DATA_FILE ||
-    path.join(__dirname, '..', 'data', 'backlog.json');
+    path.join(__dirname, 'data', 'backlog.json');
 
 const MAX_PAYLOAD = 16 * 1024 * 1024;
 const MAX_BACKLOG_BYTES = 60 * 1024 * 1024;
@@ -60,7 +62,6 @@ function loadBacklog() {
         }
 
         console.log('Backlog loaded successfully');
-
     } catch (err) {
         console.log('No existing backlog found. Starting fresh.');
     }
@@ -99,7 +100,6 @@ function saveSoon() {
                 DATA_FILE + '.tmp',
                 DATA_FILE
             );
-
         } catch (err) {
             console.error('Save failed:', err.message);
         }
@@ -129,7 +129,6 @@ function getRoom(roomId) {
 
 // HTTP SERVER
 const server = http.createServer((req, res) => {
-
     let urlPath;
 
     try {
@@ -276,7 +275,6 @@ wss.on('connection', (ws) => {
 
         // Join room
         if (m.t === 'hello') {
-
             if (
                 room ||
                 typeof m.room !== 'string' ||
