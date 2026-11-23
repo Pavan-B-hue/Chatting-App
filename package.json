@@ -4,7 +4,7 @@
   "description": "Reels Lite: private two-person app with a relay server that only ever sees encrypted data",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server.js"
   },
   "engines": {
     "node": ">=18"
