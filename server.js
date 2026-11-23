@@ -12,7 +12,7 @@ const { WebSocketServer } = require('ws');
 
 const PORT = process.env.PORT || 3000;
 
-const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
+const PUBLIC_DIR = __dirname;
 
 const DATA_FILE =
     process.env.DATA_FILE ||
